@@ -31,7 +31,7 @@
 #define TIL_FILE "eco"
 #define TIL_SUFFIX ".til"
 #define TILE_SET_DIR "../Data/tilesets/"
-#define DEFAULT_SET "grismouton.txt"
+#define DEFAULT_SET "grismouton"
 #define CELL_SIZE 0.5f
 
 
