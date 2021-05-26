@@ -1,4 +1,4 @@
-# AMRELtest: Data set for testing AMREL (Automatic Mountain Road Extraction from LiDAR data)
+# AMRELtest: data set and ground truth creation software for testing Automatic Mountain Road Extraction from LiDAR data
 
 This data set contains :
 
@@ -26,6 +26,12 @@ Uppsala, Sweden, May 24-17, 2021 (Springer LNCS 12708), pp. 93-106.
 * roadgt.pro provided for qmake.
 
 ## COMPARISON OF DETECTED ROADS WITH CREATED GROUND TRUTH
+
+![Figure](Data/outputs/gt_gm.png?raw=true)
+![Figure](Data/outputs/roads_gm.png?raw=true)
+
+**Figure 1: to the left, road ground truth of Gris Mouton sector;
+to the right, detected roads by AMREL.**
 
 In the following, we assume that *'sector'* is the name of the studied sector,
 defined by a set of tiles.
@@ -58,7 +64,7 @@ roadgt --comp 'sector'
 
 * Precision map : *Data/outputs/precision_'sector'.png*
 
-### GROUND TRUTH CREATION
+## GROUND TRUTH CREATION
 
 ### Inputs
 
