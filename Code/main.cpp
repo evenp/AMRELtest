@@ -26,10 +26,7 @@
 #include "gtwindow.h"
 
 #define NVM_DIR "../Data/nvm/"
-#define NVM_SUFFIX ".nvm"
 #define TIL_DIR "../Data/til/"
-#define TIL_FILE "eco"
-#define TIL_SUFFIX ".til"
 #define TILE_SET_DIR "../Data/tilesets/"
 #define DEFAULT_SET "grismouton"
 #define CELL_SIZE 0.5f
@@ -92,10 +89,10 @@ int main (int argc, char *argv[])
   if (tiledef)
   {
     std::string nvmfile (NVM_DIR);
-    nvmfile += tilename + std::string (NVM_SUFFIX);
     std::string ptsfile (TIL_DIR);
-    ptsfile += TIL_FILE + std::string ("/") + TIL_FILE + std::string ("_")
-               + tilename + std::string (TIL_SUFFIX);
+    nvmfile += tilename + TerrainMap::NVM_SUFFIX;
+    ptsfile += IPtTile::ECO_DIR + IPtTile::ECO_PREFIX
+               + tilename + IPtTile::TIL_SUFFIX;
     if (! window.setBinaryLidarFiles (nvmfile, ptsfile))
     {
       std::cout << "Header of " << nvmfile << " inconsistent" << std::endl;
@@ -119,12 +116,10 @@ int main (int argc, char *argv[])
         else
         {
           std::string nvmfile (NVM_DIR);
-          nvmfile += sval;
           std::string ptsfile (TIL_DIR);
-          ptsfile += TIL_FILE + std::string ("/")
-                     + TIL_FILE + std::string ("_") + sval;
-          nvmfile += std::string (NVM_SUFFIX);
-          ptsfile += std::string (TIL_SUFFIX);
+          nvmfile += sval + TerrainMap::NVM_SUFFIX;
+          ptsfile += IPtTile::ECO_DIR + IPtTile::ECO_PREFIX
+                     + sval + IPtTile::TIL_SUFFIX;
           if (! window.setBinaryLidarFiles (nvmfile, ptsfile))
           {
             std::cout << "Header of " << nvmfile << " inconsistent"

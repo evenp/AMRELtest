@@ -37,6 +37,8 @@
 #define AREA_PREF "../Data/areas/area_"
 #define CAPT_PREF "../Data/outputs/capture_"
 
+const std::string GTCreator::VERSION = "1.1.1";
+
 const int GTCreator::BACK_BLACK = 0;
 const int GTCreator::BACK_WHITE = 1;
 const int GTCreator::BACK_IMAGE = 2;

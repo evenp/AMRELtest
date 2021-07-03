@@ -46,6 +46,10 @@ class GTCreator : public QWidget
 
 public:
 
+  /** Version number */
+  static const std::string VERSION;
+
+
   /**
    * \brief Creates a road ground truth creator.
    */
