@@ -31,13 +31,13 @@
 #define LASTAREA_NAME "../Data/areas/last.txt"
 #define LASTROAD_NAME "../Data/roads/last.txt"
 #define DETECT_PREF "../Data/detections/roads_"
-#define ROADSET_PREF "../Data/roadsets/roads_"
+#define ROADSET_PREF "../Data/roadsets/rgt_"
 #define ROADS_PREF "../Data/roads/track_"
 #define ROADS_SUFF ".txt"
 #define AREA_PREF "../Data/areas/area_"
 #define CAPT_PREF "../Data/outputs/capture_"
 
-const std::string GTCreator::VERSION = "1.1.1";
+const std::string GTCreator::VERSION = "1.1.2";
 
 const int GTCreator::BACK_BLACK = 0;
 const int GTCreator::BACK_WHITE = 1;
@@ -45,7 +45,6 @@ const int GTCreator::BACK_IMAGE = 2;
 
 const int GTCreator::DEFAULT_PEN_WIDTH = 1;
 const int GTCreator::SELECT_TOL = 5;
-const int GTCreator::SUBDIV = 5;
 
 
 

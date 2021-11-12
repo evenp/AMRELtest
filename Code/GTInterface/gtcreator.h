@@ -174,9 +174,6 @@ private:
   /** Tolerence for segment picking (in count of naive lines) */
   static const int SELECT_TOL;
 
-  /** Point cloud / Dtm image ratio. */
-  static const int SUBDIV;
-
 
   /** Initial scan start point. */
   Pt2i p1;
