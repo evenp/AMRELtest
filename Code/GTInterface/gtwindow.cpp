@@ -76,6 +76,12 @@ void GTWindow::setSectorName (std::string name)
 }
 
 
+void GTWindow::setMaskDisplay (bool opt)
+{
+  creationWidget->setMaskDisplay (opt);
+}
+
+
 void GTWindow::runOptions ()
 {
 }

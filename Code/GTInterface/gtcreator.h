@@ -85,8 +85,15 @@ public:
 
   /**
    * Sets the tested sector name.
+   * @param name New sector name.
    */
   void setSectorName (std::string name);
+
+  /**
+   * Sets the mask output option.
+   * @param opt New option status.
+   */
+  void setMaskDisplay (bool opt);
 
   /**
    * \brief Applies default options (read in defaults files).
@@ -171,6 +178,8 @@ private:
 
   /** Default value for pen width. */
   static const int DEFAULT_PEN_WIDTH;
+  /** Width of roads when displayed large. */
+  static const int LARGE_ROAD_WIDTH;
   /** Tolerence for segment picking (in count of naive lines) */
   static const int SELECT_TOL;
 
@@ -206,7 +215,9 @@ private:
   /** Selection stroke color. */
   QColor selectionColor;
   /** Tile borders display modality. */
-  bool tiledisp;
+  bool tile_disp;
+  /** Mask output option. */
+  bool mask_disp;
 
   /** Presently loaded image. */
   QImage loadedImage;

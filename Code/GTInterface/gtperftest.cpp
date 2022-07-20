@@ -26,6 +26,7 @@
 #include "gtperftest.h"
 
 #define IMAGE_SUFFIX ".png"
+#define MASK_PREF "../Data/outputs/mask_"
 #define RECALL_PREF "../Data/outputs/recall_"
 #define PREC_PREF "../Data/outputs/precision_"
 #define ROAD_PREF "../Data/roads/track_"
@@ -86,6 +87,12 @@ void GTPerfTest::loadDiscardedAreas (std::string name)
     area = NULL;
   }
   else std::cout << name << " loaded" << std::endl;
+}
+
+
+void GTPerfTest::loadSectorName (std::string name)
+{
+  sect_name = name;
 }
 
 
@@ -173,9 +180,30 @@ bool GTPerfTest::loadRoadSet (std::string name)
     for (int i = 0; i < width; i++)
       if (QColor (map_r.pixel (i, height - 1 - j)).value () < 10)
         gt_w.push_back (Pt2i (i, j));
-
-  sect_name = name;
   return true;
+}
+
+
+void GTPerfTest::getMask ()
+{
+  QImage area_mask (width, height, QImage::Format_RGB32);
+  area_mask.fill (Qt::white);
+  if (area != NULL)
+  {
+    QPainter painter (&area_mask);
+    const std::vector<Pt2i> *corners = area->getCorners ();
+    std::vector<Pt2i>::const_iterator it = corners->begin ();
+    while (it != corners->end ())
+    {
+      Pt2i c1 (*it++);
+      Pt2i c2 (*it++);
+      painter.fillRect (c1.x (), height - 1 - c2.y (),
+                        c2.x () - c1.x (), c2.y () - c1.y (), Qt::black);
+    }
+  }
+  std::string rname (MASK_PREF);
+  rname += sect_name + std::string (IMAGE_SUFFIX);
+  area_mask.save (rname.c_str ());
 }
 
 

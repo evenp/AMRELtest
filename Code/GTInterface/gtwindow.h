@@ -76,8 +76,15 @@ public:
 
   /**
    * Sets the tested sector name.
+   * @param name New sector name.
    */
   void setSectorName (std::string name);
+
+  /**
+   * Sets the mask output option.
+   * @param opt New option status.
+   */
+  void setMaskDisplay (bool opt);
 
   /**
    * Takes into account the option (after image load).

@@ -58,6 +58,8 @@ int main (int argc, char *argv[])
       }
       else if (std::string(argv[i]) == std::string ("--comp"))
         comparing = true;
+      else if (std::string(argv[i]) == std::string ("--mask"))
+        window.setMaskDisplay (true);
       else
       {
         int l = std::string (argv[i]).length ();

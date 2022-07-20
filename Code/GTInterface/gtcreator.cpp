@@ -37,13 +37,14 @@
 #define AREA_PREF "../Data/areas/area_"
 #define CAPT_PREF "../Data/outputs/capture_"
 
-const std::string GTCreator::VERSION = "1.1.3";
+const std::string GTCreator::VERSION = "1.1.4";
 
 const int GTCreator::BACK_BLACK = 0;
 const int GTCreator::BACK_WHITE = 1;
 const int GTCreator::BACK_IMAGE = 2;
 
 const int GTCreator::DEFAULT_PEN_WIDTH = 1;
+const int GTCreator::LARGE_ROAD_WIDTH = 16;
 const int GTCreator::SELECT_TOL = 5;
 
 
@@ -58,7 +59,8 @@ GTCreator::GTCreator (QWidget *parent)
   picking = false;
   udef = false;
   nodrag = true;
-  tiledisp = true;
+  tile_disp = true;
+  mask_disp = false;
 
   // Initializes the maps and the auxiliary views
   iratio = 1.0f;
@@ -159,6 +161,12 @@ QSize GTCreator::createMap (bool binary)
 void GTCreator::setSectorName (std::string name)
 {
   sector_name = name;
+}
+
+
+void GTCreator::setMaskDisplay (bool opt)
+{
+  mask_disp = opt;
 }
 
 
@@ -716,11 +724,11 @@ void GTCreator::displaySelectionResult ()
   lighten (augmentedImage);
   QPainter painter (&augmentedImage);
   drawArea (painter);
-  if (tiledisp) drawTiles (painter);
+  if (tile_disp) drawTiles (painter);
   
   // draws saved roads
   painter.setPen (QPen (dispPub ? Qt::black : Qt::blue,
-                        dispPub ? 16 : DEFAULT_PEN_WIDTH));
+                        dispPub ? LARGE_ROAD_WIDTH : DEFAULT_PEN_WIDTH));
   std::vector<ASTrack>::iterator trit = old_roads.begin ();
   while (trit != old_roads.end ())
   {
@@ -741,7 +749,7 @@ void GTCreator::displaySelectionResult ()
   if (allPoints)
   {
     painter.setPen (QPen (dispPub ? Qt::black : Qt::white,
-                          dispPub ? 32 : 2 * DEFAULT_PEN_WIDTH));
+               dispPub ? 2 * LARGE_ROAD_WIDTH : 2 * DEFAULT_PEN_WIDTH));
     std::vector<ASTrack>::iterator trit = old_roads.begin ();
     while (trit != old_roads.end ())
     {
@@ -758,7 +766,7 @@ void GTCreator::displaySelectionResult ()
 
   // draws lines
   painter.setPen (QPen (dispPub ? Qt::gray : Qt::green,
-                        dispPub ? 16 : DEFAULT_PEN_WIDTH));
+                        dispPub ? LARGE_ROAD_WIDTH : DEFAULT_PEN_WIDTH));
   std::vector<Pt2i> pts = trac->points ();
   std::vector<Pt2i>::iterator it = pts.begin ();
   if (it != pts.end ())
@@ -817,12 +825,14 @@ void GTCreator::compare ()
 {
   GTPerfTest ptest;
   ptest.setSize (width, height, ptset.xref (), ptset.yref (), 500);
+  ptest.loadSectorName (sector_name);
   ptest.loadDetectionMap (std::string (DETECT_PREF)
                           + sector_name + std::string (IM_SUFF));
   ptest.loadRoadSet (std::string (ROADSET_PREF)
                      + sector_name + std::string (TXT_SUFF));
   ptest.loadDiscardedAreas (std::string (AREA_PREF)
                             + sector_name + std::string (TXT_SUFF));
+  if (mask_disp) ptest.getMask ();
   ptest.getRecall ();
   ptest.getPrecision ();
   ptest.getFMeasure ();

@@ -70,10 +70,21 @@ public:
   void loadDiscardedAreas (std::string name);
 
   /**
+   * \brief Loads the name of tested sector.
+   * @param name Sector name.
+   */
+  void loadSectorName (std::string name);
+
+  /**
    * \brief Loads a road set to test.
    * @param name Road set file name.
    */
   bool loadRoadSet (std::string name);
+
+  /**
+   * \brief Outputs measure mask.
+   */
+  void getMask ();
 
   /**
    * \brief Computes and edits recall measure.
