@@ -37,7 +37,7 @@
 #define AREA_PREF "../Data/areas/area_"
 #define CAPT_PREF "../Data/outputs/capture_"
 
-const std::string GTCreator::VERSION = "1.1.5";
+const std::string GTCreator::VERSION = "1.1.6";
 
 const int GTCreator::BACK_BLACK = 0;
 const int GTCreator::BACK_WHITE = 1;
@@ -130,7 +130,7 @@ QSize GTCreator::createMap (bool binary)
                                ptset.xref (), ptset.yref ()))
       return QSize (0, 0);
   }
-  else if (! dtm_map.create ()) return QSize (0, 0);
+  else if (! dtm_map.createMapFromDtm ()) return QSize (0, 0);
   width = dtm_map.width ();
   height = dtm_map.height ();
   cellsize = dtm_map.cellSize ();
