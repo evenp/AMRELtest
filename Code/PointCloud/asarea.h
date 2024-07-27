@@ -108,6 +108,6 @@ private:
   int start_x;
   /** First corner Y coordinate. */
   int start_y;
-};
 
+};
 #endif
